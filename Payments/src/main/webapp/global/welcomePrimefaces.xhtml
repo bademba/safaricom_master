@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Payments</title>
+            </f:facet>
+
+            <style type="text/css">
+                .ui-datatable,
+                .ui-datatable .ui-datatable-tablewrapper table {
+                    font-size: 12px !important;
+                }
+
+
+                /* For Paginator */
+                .ui-datatable .ui-paginator .ui-paginator-first, 
+                .ui-datatable .ui-paginator .ui-paginator-prev, 
+                .ui-datatable .ui-paginator .ui-paginator-pages .ui-paginator-page, 
+                .ui-datatable .ui-paginator .ui-paginator-next, 
+                .ui-datatable .ui-paginator .ui-paginator-last, 
+                .ui-datatable .ui-paginator .ui-paginator-rpp-options {
+                    font-size: 10px !important;
+                }
+
+                .ui-datatable .ui-paginator .ui-paginator-current {
+                    font-size: 10px !important;
+                }
+            </style>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    Header
+
+                    <h:form>
+                        <p:growl id="messages" showDetail="true" />
+
+                        <p:toolbar>
+                            <f:facet name="left">
+                                <p:commandButton type="button" value="New" icon="ui-icon-document" />
+
+                                <p:commandButton type="button" value="Open" icon="ui-icon-folder-open" />
+
+                                <span class="ui-separator">
+                                    <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                                </span>
+
+                                <p:commandButton type="button" title="Save" icon="ui-icon-disk" />
+                                <p:commandButton type="button" title="Delete" icon="ui-icon-trash" />
+                                <p:commandButton type="button" title="Print" icon="ui-icon-print" />
+                            </f:facet>
+
+                            <f:facet name="right">
+                                <p:menuButton value="#{loginBean.uname}">     
+                                    <p:menuitem value="Profile" icon="fa fa-user" url="#"/>
+                                    <p:menuitem value="Logout" icon="ui-icon-contact" action="#{loginBean.logout()}"/>
+
+                                </p:menuButton>
+                            </f:facet>
+
+                        </p:toolbar>
+                    </h:form>
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Menu" collapsible="false">
+                    <h:form>
+                        <!--<p:menu>-->
+                            <p:panelMenu style="width:200px">
+                                <p:submenu label="Resources" >
+                                    <p:menuitem value="C2B Validation" action="#{PageController.c2BValidationPageContoller}"  url="../global/C2BValidation.xhtml"/>
+                                    <p:menuitem value="Documentation" url="#" />
+                                    <p:menuitem value="Configuration" url="#" />
+                                    <p:menuitem value="Themes" url="#" />
+
+                                </p:submenu>
+                            </p:panelMenu>
+
+<!--                        </p:menu>-->
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    Web Payments
+                </p:layoutUnit>
+
+
+                <p:layoutUnit position="center">
+
+                    <f:facet name="header">C2B Confirmations</f:facet>
+                    <h:form id="form1">
+
+
+                        <p:growl id="messages" showDetail="true"/>
+                        <p:dataTable   value="#{C2BTransactions.c2BTransactionList}" var="c2b" editable="true" style="margin-bottom:20px" rows="10"
+                                       paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                       rowsPerPageTemplate="5,10,15">
+                            <!--                            <f:facet name="header">C2B</f:facet>-->
+
+
+
+                            <!--                            <p:column headerText="UID"> 
+                                                            <h:outputText value="#{c2b.uid}" />
+                                                        </p:column>-->
+
+                            <p:column headerText="TxType"> 
+                                <h:outputText value="#{c2b.transactiontype}" />
+                            </p:column>
+
+                            <p:column headerText="TxID">
+                                <h:outputText value="#{c2b.transid}" />
+                            </p:column>
+
+                            <p:column headerText="TxAmount">   
+                                <h:outputText value="KES #{c2b.transamount}" />
+                            </p:column>
+
+                            <p:column headerText="BSC"> 
+                                <h:outputText value="#{c2b.businessshortcode}" />
+                            </p:column>
+
+                            <p:column headerText="BRN">
+                                <h:outputText value="#{c2b.billrefnumber}" />
+                            </p:column>
+
+                            <p:column headerText="INVNo">
+                                <h:outputText value="#{c2b.invoicenumber}" />
+                            </p:column>
+
+                            <p:column headerText="OrgAccBal">
+                                <h:outputText value="KES #{c2b.orgaccountbalance}" />
+                            </p:column>
+
+                            <p:column headerText="TPTxID">
+                                <h:outputText value="#{c2b.thirdpartytransid}" />
+                            </p:column>
+
+                            <p:column headerText="MSISDN">
+                                <h:outputText value="#{c2b.msisdn}" />
+                            </p:column>
+
+                            <p:column headerText="Sender">
+                                <h:outputText value="#{c2b.firstname}#{c2b.middlename}#{c2b.lastname}" />
+                            </p:column>
+
+                            <p:column style="width:32px">
+                                <p:rowEditor />
+                            </p:column>
+
+                        </p:dataTable>
+                        <h3>Export Page Data Only</h3>
+                        <h:commandLink>
+                            <p:graphicImage name="/images/excel.jpg" />
+                            <p:dataExporter type="xls" target="tbl" fileName="cars" pageOnly="true"/>
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage name="/demo/images/pdf.png" />
+                            <p:dataExporter type="pdf" target="tbl" fileName="cars" pageOnly="true" />
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage name="/demo/images/csv.png" />
+                            <p:dataExporter type="csv" target="tbl" fileName="cars" pageOnly="true" />
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage name="/demo/images/xml.png" />
+                            <p:dataExporter type="xml" target="tbl" fileName="cars" pageOnly="true" />
+                        </h:commandLink>
+
+                    </h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
