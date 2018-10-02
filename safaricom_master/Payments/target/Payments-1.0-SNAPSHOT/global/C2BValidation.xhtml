@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+            
+            <style type="text/css">
+   .ui-datatable,
+   .ui-datatable .ui-datatable-tablewrapper table {
+        font-size: 12px !important;
+   }
+            
+   /* For Paginator */
+   .ui-datatable .ui-paginator .ui-paginator-first, 
+   .ui-datatable .ui-paginator .ui-paginator-prev, 
+   .ui-datatable .ui-paginator .ui-paginator-pages .ui-paginator-page, 
+   .ui-datatable .ui-paginator .ui-paginator-next, 
+   .ui-datatable .ui-paginator .ui-paginator-last, 
+   .ui-datatable .ui-paginator .ui-paginator-rpp-options {
+        font-size: 10px !important;
+   }
+            
+   .ui-datatable .ui-paginator .ui-paginator-current {
+       font-size: 10px !important;
+   }
+</style>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    Header
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Resources">
+                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
+                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    Welcome to PrimeFaces
+                </p:layoutUnit>
+                
+                
+                  <p:layoutUnit position="center">
+                    HHHE
+                     <f:facet name="header">C2B</f:facet>
+                    <h:form id="form1">
+
+                 
+                        <p:growl id="messages" showDetail="true"/>
+                        <p:dataTable   value="#{C2BTransactions.c2BTransactionList}" var="c2b" editable="true" style="margin-bottom:20px" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                            <f:facet name="header">C2B</f:facet>
+
+ 
+
+<!--                            <p:column headerText="UID"> 
+                                <h:outputText value="#{c2b.uid}" />
+                            </p:column>-->
+
+                             <p:column headerText="TxType"> 
+                                 <h:outputText value="#{c2b.transactiontype}" />
+                            </p:column>
+                            
+                            <p:column headerText="TxID">
+                                <h:outputText value="#{c2b.transid}" />
+                            </p:column>
+                            
+                            <p:column headerText="TxAmount">   
+                                <h:outputText value="KES #{c2b.transamount}" />
+                            </p:column>
+
+                            <p:column headerText="BSC"> 
+                                <h:outputText value="#{c2b.businessshortcode}" />
+                            </p:column>
+
+                            <p:column headerText="BRN">
+                                <h:outputText value="#{c2b.billrefnumber}" />
+                            </p:column>
+                            
+                            <p:column headerText="INVNo">
+                                <h:outputText value="#{c2b.invoicenumber}" />
+                            </p:column>
+                            
+                             <p:column headerText="OrgAccBal">
+                                 <h:outputText value="KES #{c2b.orgaccountbalance}" />
+                            </p:column>
+                            
+                                <p:column headerText="TPTxID">
+                                    <h:outputText value="#{c2b.thirdpartytransid}" />
+                            </p:column>
+                            
+                                <p:column headerText="MSISDN">
+                                    <h:outputText value="#{c2b.msisdn}" />
+                            </p:column>
+                            
+                                <p:column headerText="Fname">
+                                    <h:outputText value="#{c2b.firstname}#{c2b.middlename}#{c2b.lastname}" />
+                            </p:column>
+                            
+                            <p:column style="width:32px">
+                                <p:rowEditor />
+                            </p:column>
+                        </p:dataTable>
+
+                    </h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://f4609a86.ngrok.io/TestWebService/TestWS?wsdl" uri="wsdl/f4609a86.ngrok.io/TestWebService/TestWS.wsdl"/>
+    <system systemId="http://f4609a86.ngrok.io:80/TestWebService/TestWS?xsd=1" uri="wsdl/f4609a86.ngrok.io_80/TestWebService/TestWS.xsd_1.xsd"/>
+</catalog>
